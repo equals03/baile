@@ -1,0 +1,11 @@
+result
+.cache
+.local
+.direnv
+doc/index.html
+pkgs/_sources/.shake*
+.nixos-test-history
+
+/*.qcow2
+.std
+
