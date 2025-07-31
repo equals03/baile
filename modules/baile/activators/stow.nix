@@ -6,6 +6,7 @@
   get-program-package,
   ...
 }: let
+  inherit (builtins) any attrValues baseNameOf map;
   inherit (lib) baile types;
 
   cfg = config.environment.activators.stow;
@@ -17,19 +18,19 @@
   state-dir = "${cfg-environment.home}/${cfg-xdg.state.path}/baile";
 
   stow-activation = let
-    should-gc-root = builtins.any (file: file.mode == "symlink") (builtins.attrValues files');
+    should-gc-root = any (file: file.mode == "symlink") (attrValues files');
 
     mkCopyCmd = file:
       ''install_file "${file.target}"''
       + lib.optionalString (file.mode != null) " \"${file.mode}\"";
-    copy-cmds = lib.concatStringsSep "\n  " (lib.flatten (builtins.map mkCopyCmd (builtins.attrValues files')));
+    copy-cmds = lib.concatStringsSep "\n  " (lib.flatten (map mkCopyCmd (attrValues files')));
     max-keep = lib.optionalString (cfg.settings.maxGenerations != null) (toString cfg.settings.maxGenerations);
   in
     pkgs.writeShellApplication {
       runtimeInputs = map get-program-package ["coreutils" "stow"];
       text = ''
         NIX_PACKAGE_PATH="${files-package}"
-        NIX_PACKAGE_NAME="${builtins.baseNameOf files-package}"
+        NIX_PACKAGE_NAME="${baseNameOf files-package}"
 
         STATE_DIR="${state-dir}"
 

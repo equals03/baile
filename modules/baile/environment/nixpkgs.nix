@@ -6,7 +6,7 @@
 }: let
   inherit (lib) types;
 
-  cfg = config.environment.nixpkgs;
+  cfg = config.nixpkgs;
 
   overlay-type = lib.mkOptionType {
     name = "nixpkgs-overlay";
@@ -22,7 +22,7 @@
       description = "An evaluation of Nixpkgs; the top level attribute set of packages";
     };
 in {
-  options.environment = {
+  options = {
     nixpkgs = {
       overlays = lib.mkOption {
         default = [];

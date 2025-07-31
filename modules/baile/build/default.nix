@@ -3,6 +3,7 @@
 in {
   imports = [
     ./activation.nix
+    ./environment.nix
     ./files.nix
   ];
 

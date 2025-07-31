@@ -1,6 +1,7 @@
 {
   imports = [
-    ./shell.nix
     ./xdg-user-dirs.nix
+
+    ./programs/bat.nix
   ];
 }

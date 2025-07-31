@@ -26,6 +26,20 @@ in {
         then "/Users/${cfg.user}"
         else "/home/${cfg.user}";
     };
+
+    sessionVariables = lib.mkOption {
+      type = with types; attrsOf (oneOf [(listOf (oneOf [int str path])) int str path]);
+      default = {};
+      example = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+      };
+      description = ''
+        A set of environment variables used in the user environment.
+        If a list of strings is used, they will be concatenated with colon
+        characters.
+      '';
+    };
   };
 
   config = {

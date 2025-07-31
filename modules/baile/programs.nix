@@ -5,7 +5,7 @@
   lib,
   ...
 }: let
-  inherit (builtins) mapAttrs;
+  inherit (builtins) map mapAttrs;
   inherit (lib) baile types;
 
   cfg = config.programs;

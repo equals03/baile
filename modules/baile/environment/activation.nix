@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   get-program-package,
   ...

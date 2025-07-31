@@ -12,21 +12,18 @@
           programs = {
             fzf = {
               enable = true;
-              config = {
-                files = {
-                  "fzf" = ''~/alice/fzf'';
-                  ".config/fzf/fzf" = ''~alice/.config/fzf/fzf'';
-                };
-                xdg.state.files."fzf" = "~alice/.local/state/fzf";
+              files = {
+                "fzf" = ''~/alice/fzf'';
+                ".config/fzf/fzf" = ''~alice/.config/fzf/fzf'';
               };
+              xdg.state.files."fzf" = "~alice/.local/state/fzf";
             };
             nushell = {
               enable = false;
-              config = {
-                files = {
-                  "nushell" = ''~alice/nushell'';
-                  ".config/nushell/nushell" = ''~alice/.config/nushell/nushell'';
-                };
+
+              files = {
+                "nushell" = ''~alice/nushell'';
+                ".config/nushell/nushell" = ''~alice/.config/nushell/nushell'';
               };
             };
           };
@@ -52,23 +49,21 @@
           programs = {
             fzf = {
               enable = false;
-              config = {
-                files = {
-                  "fzf" = ''~bob/fzf'';
-                  ".config/fzf/fzf" = ''~bob/.config/fzf/fzf'';
-                };
-                xdg.state.files."fzf" = "~bob/.local/state/fzf";
+
+              files = {
+                "fzf" = ''~bob/fzf'';
+                ".config/fzf/fzf" = ''~bob/.config/fzf/fzf'';
               };
+              xdg.state.files."fzf" = "~bob/.local/state/fzf";
             };
             nushell = {
               enable = true;
-              config = {
-                files = {
-                  "nushell" = ''~bob/nushell'';
-                  ".config/nushell/nushell" = ''~bob/.config/nushell/nushell'';
-                };
-                xdg.state.files."nushell" = "~bob/.local/state/nushell";
+
+              files = {
+                "nushell" = ''~bob/nushell'';
+                ".config/nushell/nushell" = ''~bob/.config/nushell/nushell'';
               };
+              xdg.state.files."nushell" = "~bob/.local/state/nushell";
             };
           };
 

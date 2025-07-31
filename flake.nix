@@ -32,7 +32,7 @@
 
     baileModules = {
       configurations = rec {
-        _file = ./modules/baile-configurations;
+        _file = ./modules/baile-extra;
         _class = "baile";
         imports = [_file];
       };
