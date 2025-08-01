@@ -31,7 +31,7 @@
     };
 
     baileModules = {
-      configurations = rec {
+      extra = rec {
         _file = ./modules/baile-extra;
         _class = "baile";
         imports = [_file];

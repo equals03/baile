@@ -4,8 +4,6 @@
   config,
   ...
 }: let
-  inherit (lib) baile;
-
   cfg-environment = config.environment;
   to-env-var = env-var: lib.concatMapStringsSep ":" toString (lib.toList env-var);
 
