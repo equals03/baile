@@ -2,12 +2,16 @@
   pkgs,
   config,
   lib,
+  get-program-package,
   ...
 }: let
-  inherit (lib) types;
+  inherit (builtins) map;
+  inherit (lib) baile types;
 
   cfg = config.xdg.portal;
   portals-dir = "${config.environment.profile}/share/xdg-desktop-portal/portals";
+
+  packageOptions = with types; oneOf [str package (listOf (either package str))];
 
   associationOptions = with types;
     attrsOf (coercedTo (either (listOf str) str) (x: lib.concatStringsSep ";" (lib.toList x)) str);
@@ -16,14 +20,24 @@ in {
     enable = lib.mkEnableOption "Xdg desktop integration";
 
     portals = lib.mkOption {
-      type = with types; listOf package;
+      type = packageOptions;
       default = [];
+      apply = baile.compose-all [
+        lib.toList
+        (map get-program-package)
+        lib.flatten
+      ];
     };
 
     configPackages = lib.mkOption {
-      type = with types; listOf package;
+      type = packageOptions;
       default = [];
       example = lib.literalExpression "[ pkgs.gnome.gnome-session ]";
+      apply = baile.compose-all [
+        lib.toList
+        (map get-program-package)
+        lib.flatten
+      ];
     };
 
     xdgOpenUsePortal = lib.mkOption {
@@ -68,7 +82,7 @@ in {
     (lib.mkIf (cfg.config != {}) {
       xdg.dirs.config.files =
         lib.concatMapAttrs (desktop: conf: {
-          "xdg-desktop-portal/${lib.optionalString (desktop != "common") "$desktop-"}portals.conf" =
+          "xdg-desktop-portal/${lib.optionalString (desktop != "common") "${desktop}-"}portals.conf" =
             lib.generators.toINI {}
             {preferred = conf;};
         })

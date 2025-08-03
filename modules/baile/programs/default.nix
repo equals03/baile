@@ -12,7 +12,12 @@
 
   get-program-package = baile.overloaded {
     list = programs: lib.flatten (map get-program-package programs);
-    string = program: cfg.${program}.package or pkgs.${program};
+    string = program: let
+      pkg = cfg.${program}.package or null;
+    in
+      if pkg != null
+      then pkg
+      else pkgs.${program};
     default = lib.id;
   };
 
