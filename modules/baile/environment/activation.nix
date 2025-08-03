@@ -13,7 +13,7 @@
     str;
 
   activation-type = with types;
-    submodule ({...}: {
+    submodule (_: {
       options = {
         dag = lib.mkOption {
           type = baile.types.dag.of coerced-string-type;

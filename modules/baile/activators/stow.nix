@@ -15,7 +15,7 @@
   cfg-xdg = config.xdg;
 
   files-package = cfg-build.filesPackage;
-  state-dir = "${cfg-environment.home}/${cfg-xdg.state.path}/baile";
+  state-dir = "${cfg-environment.home}/${cfg-xdg.dirs.state.path}/baile";
 
   stow-activation = let
     should-gc-root = any (file: file.mode == "symlink") (attrValues files');
@@ -229,7 +229,7 @@ in {
     };
   };
 
-  config = lib.mkIf (cfg.enable) {
+  config = lib.mkIf cfg.enable {
     build.stowActivationPackage = stow-activation;
     environment.activation.dag = {
       activate-files = baile.dag.entryAfter ["write-boundary"] ''

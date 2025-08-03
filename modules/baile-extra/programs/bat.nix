@@ -1,3 +1,6 @@
+## this is here as an example of how to extend a program entry to be more "home-manager" like.
+## no real intention to move this direction because I manage most of my configuration
+## externally and I want to keep things "simple", but hey, it could be done :P
 {lib, ...}: let
   inherit (lib) types;
 
@@ -116,8 +119,8 @@ in {
       };
     };
 
-    config = lib.mkIf (cfg.enable) {
-      xdg =
+    config = lib.mkIf cfg.enable {
+      xdg.dirs =
         lib.mkMerge
         (
           [(lib.mkIf (cfg.settings != {}) {config.files."bat/config" = toConfigFile cfg.settings;})]
@@ -125,7 +128,7 @@ in {
             name: val: {
               config.files."bat/themes/${name}.tmTheme" = {
                 source =
-                  if isNull val.file
+                  if (val.file == null)
                   then "${val.src}"
                   else "${val.src}/${val.file}";
               };
@@ -135,7 +138,7 @@ in {
             name: val: {
               config.files."bat/syntaxes/${name}.sublime-syntax" = {
                 source =
-                  if isNull val.file
+                  if (val.file == null)
                   then "${val.src}"
                   else "${val.src}/${val.file}";
               };

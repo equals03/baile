@@ -16,7 +16,7 @@
                 "fzf" = ''~/alice/fzf'';
                 ".config/fzf/fzf" = ''~alice/.config/fzf/fzf'';
               };
-              xdg.state.files."fzf" = "~alice/.local/state/fzf";
+              xdg.dirs.state.files."fzf" = "~alice/.local/state/fzf";
             };
             nushell = {
               enable = false;
@@ -39,7 +39,7 @@
               '';
             };
           };
-          xdg.state.files."alice" = "~alice/.local/state/alice";
+          xdg.dirs.state.files."alice" = "~alice/.local/state/alice";
         };
       };
 
@@ -54,7 +54,7 @@
                 "fzf" = ''~bob/fzf'';
                 ".config/fzf/fzf" = ''~bob/.config/fzf/fzf'';
               };
-              xdg.state.files."fzf" = "~bob/.local/state/fzf";
+              xdg.dirs.state.files."fzf" = "~bob/.local/state/fzf";
             };
             nushell = {
               enable = true;
@@ -63,7 +63,7 @@
                 "nushell" = ''~bob/nushell'';
                 ".config/nushell/nushell" = ''~bob/.config/nushell/nushell'';
               };
-              xdg.state.files."nushell" = "~bob/.local/state/nushell";
+              xdg.dirs.state.files."nushell" = "~bob/.local/state/nushell";
             };
           };
 
@@ -75,8 +75,8 @@
               mode = "symlink";
             };
           };
-          xdg.state.files."bob" = "~bob/.local/state/bob";
-          xdg.config.files."testfile" = ./data/testfile.txt;
+          xdg.dirs.state.files."bob" = "~bob/.local/state/bob";
+          xdg.dirs.config.files."testfile" = ./data/testfile.txt;
         };
       };
 

@@ -18,7 +18,6 @@
 
   program-type = baile.mkDeferredModuleType ({
     name,
-    pkgs,
     config,
     ...
   }: {
@@ -33,8 +32,8 @@
 
       inherit (options) files;
       environment = {inherit (options.environment) activation sessionVariables;};
-      xdg = lib.mkOption {
-        type = types.attrsOf (types.submodule {options.files = options.files;});
+      xdg.dirs = lib.mkOption {
+        type = types.attrsOf (types.submodule {options = {inherit (options) files;};});
         default = {};
       };
     };

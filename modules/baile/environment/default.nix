@@ -27,6 +27,11 @@ in {
         else "/home/${cfg.user}";
     };
 
+    profile = lib.mkOption {
+      type = with types; path;
+      default = "${cfg.home}/.nix-profile";
+    };
+
     sessionVariables = lib.mkOption {
       type = with types; attrsOf (oneOf [(listOf (oneOf [int str path])) int str path]);
       default = {};

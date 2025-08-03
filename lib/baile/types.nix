@@ -127,6 +127,12 @@
     check = lib.isFunction;
   };
 
+  posix-shell-var-type = lib.mkOptionType {
+    name = "POSIX shell variable";
+    description = "a valid POSIX shell variable name";
+    check = lib.isValidPosixName;
+  };
+
   dag-entry-type = elem-type: let
     dag-submodule-type = types.submodule (
       {name, ...}: {
@@ -210,5 +216,6 @@ in {
 
     subpath = subpath-type;
     function = function-type;
+    posix.shell-variable = posix-shell-var-type;
   };
 }

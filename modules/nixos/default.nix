@@ -70,6 +70,7 @@ in {
             config = {
               environment.user = lib.mkDefault osUserConfig.name;
               environment.home = lib.mkDefault osUserConfig.home;
+              environment.profile = "/etc/profiles/per-user/${osUserConfig.name}";
             };
           });
           default = {};

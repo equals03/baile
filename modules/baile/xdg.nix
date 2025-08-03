@@ -6,20 +6,19 @@
   inherit (builtins) toString;
   inherit (lib) baile types;
 
-  cfg = config.xdg;
+  cfg = config.xdg.dirs;
 in {
-  options.xdg = lib.mkOption {
+  options.xdg.dirs = lib.mkOption {
     type = with types;
       attrsOf (types.submodule ({
         name,
         config,
         ...
       }: {
-        imports = [];
         options = {
           path = lib.mkOption {
             type = with baile.types; subpath;
-            default = name;
+            default = lib.toSentenceCase name;
             apply = toString;
           };
           files = lib.mkOption {
@@ -36,7 +35,7 @@ in {
       path = lib.mkDefault path;
     };
   in {
-    xdg = {
+    xdg.dirs = {
       cache = mkDir ".cache";
       config = mkDir ".config";
       data = mkDir ".local/share";
