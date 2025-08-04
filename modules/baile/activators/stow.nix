@@ -164,12 +164,15 @@
 
         # === Store current symlink (if exists) ===
         previous=""
+        previous_gen=""
         if [ -L "$FINAL_DIR" ]; then
           previous=$(readlink -f "$FINAL_DIR")
+          previous_gen=$(readlink "$FINAL_DIR")
         fi
 
         if [ "$previous" == "$TARGET_DIR" ]; then
-          echo "Generation is already active. No changes made."
+          echo "Generation is already active. Restowing files..."
+          stow -vvv --no-folding --dir="$STATE_DIR" --target="${cfg-environment.home}" -S current
           exit 0
         fi
 
@@ -184,7 +187,7 @@
 
         # === Restow the package ===
         SUCCESS=0
-        if ! stow --no-folding --dir="$STATE_DIR" --target="${cfg-environment.home}" ''${previous:+-D $previous} -R current; then
+        if ! stow -vvv --no-folding --dir="$STATE_DIR" --target="${cfg-environment.home}" ''${previous_gen:+-D $previous_gen} -S current; then
           SUCCESS=$?
         fi
 
