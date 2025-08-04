@@ -20,7 +20,7 @@ in {
               default = "a collection of ${name}";
             };
 
-            inherit (options) programs files;
+            inherit (options) programs files packages;
             environment = {inherit (options.environment) activation sessionVariables;};
             xdg.dirs = lib.mkOption {
               type = types.attrsOf (types.submodule {options = {inherit (options) files;};});
@@ -34,13 +34,14 @@ in {
   config = let
     collections' = baile.only-enabled cfg;
     collection-configurations = attrValues (mapAttrs (_: conf: {
-        inherit (conf) environment files xdg programs;
+        inherit (conf) environment files xdg programs packages;
       })
       collections');
 
     extract-cfg = name: lib.mkMerge (map (c: c."${name}") collection-configurations);
   in {
     programs = extract-cfg "programs";
+    packages = extract-cfg "packages";
     files = extract-cfg "files";
     environment = extract-cfg "environment";
     xdg = extract-cfg "xdg";
