@@ -184,7 +184,7 @@
 
         # === Restow the package ===
         SUCCESS=0
-        if ! stow -R --no-folding --dir="$STATE_DIR" --target="${cfg-environment.home}" current; then
+        if ! stow --no-folding --dir="$STATE_DIR" --target="${cfg-environment.home}" ''${previous:+-D $previous} -R current; then
           SUCCESS=$?
         fi
 
