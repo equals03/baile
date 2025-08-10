@@ -14,10 +14,11 @@
     list = programs: lib.flatten (map get-program-package programs);
     string = program: let
       pkg = cfg.${program}.package or null;
+      path = lib.splitString "." program;
     in
       if pkg != null
       then pkg
-      else pkgs.${program};
+      else (lib.attrByPath path null pkgs);
     default = lib.id;
   };
 
