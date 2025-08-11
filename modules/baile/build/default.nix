@@ -5,6 +5,7 @@ in {
     ./activation.nix
     ./environment.nix
     ./files.nix
+    ./systemd-environment.nix
   ];
 
   options = {
