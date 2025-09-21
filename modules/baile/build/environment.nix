@@ -7,7 +7,7 @@
   cfg-environment = config.environment;
   to-env-var = env-var: lib.concatMapStringsSep ":" toString (lib.toList env-var);
 
-  to-env = env:
+  to-posix-env = env:
     lib.concatLines (lib.mapAttrsToList (name: value: "export ${name}=\"${to-env-var value}\"") env);
 in {
   config = lib.mkIf (cfg-environment.sessionVariables != {}) {
@@ -21,6 +21,6 @@ in {
         export __BAILE_SESS_VARS_SOURCED=1
 
       ''
-      + (to-env cfg-environment.sessionVariables));
+      + (to-posix-env cfg-environment.sessionVariables));
   };
 }

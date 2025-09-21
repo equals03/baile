@@ -10,5 +10,6 @@
 
     ./programs
     ./xdg.nix
+    ./systemd.nix
   ];
 }

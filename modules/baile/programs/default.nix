@@ -38,6 +38,7 @@
 
       inherit (options) files;
       environment = {inherit (options.environment) activation sessionVariables;};
+      systemd = {inherit (options.systemd) sessionVariables;};
       xdg.dirs = lib.mkOption {
         type = types.attrsOf (types.submodule {options = {inherit (options) files;};});
         default = {};
