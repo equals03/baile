@@ -62,10 +62,7 @@ in {
             _file = ./default.nix;
             options = {
               enable =
-                lib.mkEnableOption "baile"
-                // {
-                  default = osUserConfig.enable && osUserConfig.isNormalUser;
-                };
+                lib.mkEnableOption "home management for this user";
             };
             config = {
               environment.user = lib.mkDefault osUserConfig.name;

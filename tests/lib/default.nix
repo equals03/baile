@@ -12,6 +12,8 @@ _: let
       imports = [
         config
       ];
+
+      enable = true;
     };
   };
 in {
